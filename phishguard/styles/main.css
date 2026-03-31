@@ -1,0 +1,119 @@
+/* ═══════════════════════════════════════════════════════════════
+   main.css — Phishing Email Detector Global Styles + Design Tokens
+   Inspired by zarcerog.com editorial dark aesthetic
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap');
+
+/* ── Reset + Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:          #0c0c0b;
+  --surface:     #131312;
+  --border:      #1e1e1c;
+  --accent:      #f37056;
+  --accent-dim:  #3d1f14;
+  --accent-glow: rgba(243, 112, 86, 0.15);
+  --text:        #f0ece4;
+  --text-muted:  #6b6860;
+  --safe:        #4caf76;
+  --safe-dim:    #0d2218;
+  --warn:        #e8b84b;
+  --warn-dim:    #2a2410;
+  --danger:      #f37056;
+  --danger-dim:  #3d1f14;
+
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'DM Mono', monospace;
+  --font-serif:   'Instrument Serif', serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ── Custom Cursor ── */
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+}
+.cursor-ring {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--accent);
+  opacity: 0.4;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+}
+body:hover .cursor-ring {
+  opacity: 0.7;
+}
+
+/* Cursor interaction states */
+a:hover ~ .cursor-ring,
+button:hover ~ .cursor-ring,
+.email-row:hover ~ .cursor-ring {
+  width: 42px;
+  height: 42px;
+  opacity: 0.3;
+}
+
+/* ── Grain Overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.035;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) var(--bg);
+}
+
+/* ── Global transitions ── */
+a, button {
+  transition: all 0.2s ease;
+}
